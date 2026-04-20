@@ -33,7 +33,8 @@
 - [Performance](#performance)
 - [Research Papers & References](#research-papers--references)
 - [License](#license)
-
+- [resuarch papers on brain function, wiring, and intelligence](md/Brain%20Function,%20Wiring,%20and%20Intelligence.md)
+- [resuarch papers on brain-inspired self-evolving neuromorphic AI](md/Brain-Inspired%20Self-Evolving%20Neuromorphic%20AI.md)
 ---
 
 ## Overview
