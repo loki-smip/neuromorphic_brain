@@ -4,8 +4,7 @@
 
 A complete **neuromorphic AI system** that runs on CPU — no Transformers, no backpropagation, no GPU required. The system implements a self-evolving Spiking Neural Network (SNN) with Liquid Neural Network (LNN) dynamics, structural plasticity, and biologically-inspired learning rules.
 
-> [!IMPORTANT]
-> This is NOT a traditional neural network. It uses **spike-timing-dependent plasticity (STDP)** instead of backpropagation, and physically **grows and prunes synapses** at runtime.
+> **Note:** This is NOT a traditional neural network. It uses **spike-timing-dependent plasticity (STDP)** instead of backpropagation, and physically **grows and prunes synapses** at runtime.
 
 ## Architecture Overview
 
@@ -30,21 +29,21 @@ graph TD
     style F fill:#48dbfb,color:#000
 ```
 
-## Files Created
+## Files
 
-All source files are in `q:\projuct\neuromorphic_brain\`:
+All source files in the repository root:
 
 | File | Purpose | Lines |
 |------|---------|-------|
-| [config.py](file:///q:/projuct/neuromorphic_brain/config.py) | All hyperparameters (biologically derived) | ~120 |
-| [brain_node.py](file:///q:/projuct/neuromorphic_brain/brain_node.py) | Vectorized LIF neuron population | ~180 |
-| [synapse_manager.py](file:///q:/projuct/neuromorphic_brain/synapse_manager.py) | Sparse STDP + structural plasticity | ~370 |
-| [liquid_dynamics.py](file:///q:/projuct/neuromorphic_brain/liquid_dynamics.py) | CfC continuous-time modulation | ~130 |
-| [homeostasis.py](file:///q:/projuct/neuromorphic_brain/homeostasis.py) | Firing rate regulation + emergency brake | ~130 |
-| [metaplasticity.py](file:///q:/projuct/neuromorphic_brain/metaplasticity.py) | BCM learning rate adaptation | ~130 |
-| [environment.py](file:///q:/projuct/neuromorphic_brain/environment.py) | Main simulation loop orchestrator | ~200 |
-| [visualization.py](file:///q:/projuct/neuromorphic_brain/visualization.py) | 4-panel dark theme dashboard | ~220 |
-| [main.py](file:///q:/projuct/neuromorphic_brain/main.py) | CLI entry point | ~125 |
+| [config.py](../config.py) | All hyperparameters (biologically derived) | ~120 |
+| [brain_node.py](../brain_node.py) | Vectorized LIF neuron population | ~180 |
+| [synapse_manager.py](../synapse_manager.py) | Sparse STDP + structural plasticity | ~370 |
+| [liquid_dynamics.py](../liquid_dynamics.py) | CfC continuous-time modulation | ~130 |
+| [homeostasis.py](../homeostasis.py) | Firing rate regulation + emergency brake | ~130 |
+| [metaplasticity.py](../metaplasticity.py) | BCM learning rate adaptation | ~130 |
+| [environment.py](../environment.py) | Main simulation loop orchestrator | ~200 |
+| [visualization.py](../visualization.py) | 4-panel dark theme dashboard | ~220 |
+| [main.py](../main.py) | CLI entry point | ~125 |
 
 ---
 
@@ -57,8 +56,8 @@ All source files are in `q:\projuct\neuromorphic_brain\`:
 - Mean firing rate settled at **3.73 Hz** (biological target: 5 Hz)
 
 ### 2. STDP Learning (No Backpropagation)
-- **LTP**: Pre fires before post → strengthen connection
-- **LTD**: Post fires before pre → weaken connection
+- **LTP**: Pre fires before post — strengthen connection
+- **LTD**: Post fires before pre — weaken connection
 - Produces bimodal weight distribution (visible in dashboard)
 - Eligibility traces enable reward-modulated STDP
 
@@ -79,7 +78,7 @@ All source files are in `q:\projuct\neuromorphic_brain\`:
 - Emergency GABAergic brake (>30% simultaneous firing) — 0 events triggered
 
 ### 6. Metaplasticity (BCM Theory)
-- Stability CV jumped from 0 → 1.25 at t=6000 (activity burst)
+- Stability CV jumped from 0 to 1.25 at t=6000 (activity burst)
 - System entered **"exploring" mode** — increased A+/A- learning rates
 - CV gradually decreased as network re-stabilized
 
@@ -88,7 +87,7 @@ All source files are in `q:\projuct\neuromorphic_brain\`:
 ## Simulation Results
 
 ### Evolution Dashboard
-![Evolution Dashboard showing neural activity, synapse count, firing rate distribution, and weight distribution](C:/Users/MY PC/.gemini/antigravity/brain/fa7eb644-bd61-45fc-8573-e5a0b6c27381/evolution_dashboard.png)
+![Evolution Dashboard](../output/evolution_dashboard.png)
 
 **Key observations:**
 - **Top-left**: Firing rate spike at t~6000 (25+ Hz), homeostasis pulled it back to ~3.7 Hz
@@ -97,7 +96,7 @@ All source files are in `q:\projuct\neuromorphic_brain\`:
 - **Bottom-right**: Bimodal weight distribution — STDP pushes weights toward 0 or W_MAX
 
 ### Metaplasticity Panel
-![Metaplasticity panel showing STDP parameter adaptation and stability CV over time](C:/Users/MY PC/.gemini/antigravity/brain/fa7eb644-bd61-45fc-8573-e5a0b6c27381/metaplasticity_panel.png)
+![Metaplasticity Panel](../output/metaplasticity_panel.png)
 
 **Key observations:**
 - **Top**: A+ and |A-| remained stable (minor dips during stable period, then recovery during exploring)
@@ -135,5 +134,11 @@ python main.py --timesteps 100000 --quiet --visualize
 ## Bug Fixes Applied
 
 1. **Windows cp1252 encoding** — Replaced Unicode box-drawing chars with ASCII, added `io.TextIOWrapper` fallback
-2. **Silent neurons** — Increased input rate (10→50 Hz), reduced TAU_MEMBRANE (20→10 ms)
+2. **Silent neurons** — Increased input rate (10 to 50 Hz), reduced TAU_MEMBRANE (20 to 10 ms)
 3. **Weak synaptic drive** — Added `SYNAPTIC_GAIN=50.0` to scale weight values (0-1) into meaningful current magnitudes
+
+## Research Background
+
+For the full theoretical background, see:
+- [Brain-Inspired AI: Real-time Evolution](Brain-Inspired%20AI_%20Real-time%20Evolution.md) — Spiking Neural Networks, Liquid Neural Networks, and real-time structural evolution
+- [Brain Function, Wiring, and Intelligence](Brain%20Function,%20Wiring,%20and%20Intelligence.md) — Neural mechanics, structural connectivity, plasticity, and intelligence
